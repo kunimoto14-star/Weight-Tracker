@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { auth } from '../firebase';
-import { 
-  signInWithEmailAndPassword, 
+import {
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  updateProfile 
+  updateProfile
 } from 'firebase/auth';
 import { LogIn, UserPlus } from 'lucide-react';
 
@@ -16,7 +16,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   // Security Hardening: Allowed email list (add your email here)
-  const ALLOWED_EMAILS = ['test@example.com']; // ここに許可するメールアドレスを追加してください
+  const ALLOWED_EMAILS = ['kunimoto14@gmail.com']; // ここに許可するメールアドレスを追加してください
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,11 +60,11 @@ export default function Login() {
       </h2>
 
       {error && (
-        <div style={{ 
-          background: 'rgba(239, 68, 68, 0.1)', 
-          color: 'var(--danger-color)', 
-          padding: '0.75rem', 
-          borderRadius: '8px', 
+        <div style={{
+          background: 'rgba(239, 68, 68, 0.1)',
+          color: 'var(--danger-color)',
+          padding: '0.75rem',
+          borderRadius: '8px',
           marginBottom: '1.5rem',
           fontSize: '0.9rem',
           textAlign: 'center'
@@ -77,35 +77,35 @@ export default function Login() {
         {!isLogin && (
           <div className="input-group">
             <label className="input-label">お名前</label>
-            <input 
-              type="text" 
-              className="glass-input" 
+            <input
+              type="text"
+              className="glass-input"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required 
+              required
             />
           </div>
         )}
 
         <div className="input-group">
           <label className="input-label">メールアドレス</label>
-          <input 
-            type="email" 
-            className="glass-input" 
+          <input
+            type="email"
+            className="glass-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required 
+            required
           />
         </div>
 
         <div className="input-group">
           <label className="input-label">パスワード</label>
-          <input 
-            type="password" 
-            className="glass-input" 
+          <input
+            type="password"
+            className="glass-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required 
+            required
             minLength={6}
           />
         </div>
@@ -117,12 +117,12 @@ export default function Login() {
 
       <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
         {isLogin ? 'アカウントを持っていませんか？' : '既にアカウントを持っていますか？'}
-        <button 
+        <button
           onClick={() => setIsLogin(!isLogin)}
-          style={{ 
-            background: 'none', 
-            color: 'var(--accent-color)', 
-            marginLeft: '0.5rem', 
+          style={{
+            background: 'none',
+            color: 'var(--accent-color)',
+            marginLeft: '0.5rem',
             fontWeight: 600,
             padding: 0
           }}
