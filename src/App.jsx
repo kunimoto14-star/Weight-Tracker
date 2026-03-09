@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { auth, db } from './firebase';
+import { auth, db, initError } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { 
   collection, 
@@ -93,6 +93,18 @@ function App() {
       setConfigError("APIキーが設定されていません。Vercelの環境変数を確認してください。");
     }
   }, []);
+
+  if (initError) {
+    return (
+      <div style={{ padding: '2rem', color: '#fff', textAlign: 'center' }}>
+        <h2 style={{ color: 'var(--danger-color)' }}>Firebase初期化エラー</h2>
+        <p>{initError}</p>
+        <p style={{ fontSize: '0.8rem', marginTop: '1rem', opacity: 0.7 }}>
+          環境変数または Firebase の設定を確認してください。
+        </p>
+      </div>
+    );
+  }
 
   if (configError) {
     return (

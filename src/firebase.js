@@ -19,7 +19,10 @@ if (!firebaseConfig.apiKey) {
 }
 
 // Initialize Firebase with safety
-let app, auth, db, initError = null;
+let app;
+let auth;
+let db;
+let initError = null;
 
 try {
   app = initializeApp(firebaseConfig);
