@@ -10,9 +10,22 @@ export default function WeightForm({ onAddWeight }) {
     e.preventDefault();
     if (!weight || !date) return;
     
-    // Parse the weight as a float to ensure it's a number
     const weightNum = parseFloat(weight);
-    if (isNaN(weightNum)) return;
+    
+    // Security/Logic Hardening: Validate inputs more strictly
+    if (isNaN(weightNum) || weightNum <= 0 || weightNum > 500) {
+      alert('有効な体重を入力してください (0.1kg - 500kg)');
+      return;
+    }
+
+    const inputDate = new Date(date);
+    const today = new Date();
+    today.setHours(23, 59, 59, 999); // Allow until the end of today
+
+    if (inputDate > today) {
+      alert('未来の日付は登録できません');
+      return;
+    }
 
     onAddWeight({
       id: crypto.randomUUID(),
@@ -22,7 +35,6 @@ export default function WeightForm({ onAddWeight }) {
     });
 
     setWeight('');
-    // Keep the date as is (user might want to enter multiple for same date)
   };
 
   return (
