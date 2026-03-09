@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 
 // TODO: Replace with your actual Firebase project config from Console
 const firebaseConfig = {
-  apiKey: "AIzaSyCC4ZtG1E1OWGVzhjjK0Mp0NrV58piCu0I",
-  authDomain: "weight-tracker-d851c.firebaseapp.com",
-  projectId: "weight-tracker-d851c",
-  storageBucket: "weight-tracker-d851c.firebasestorage.app",
-  messagingSenderId: "403522202862",
-  appId: "1:403522202862:web:5579c951a3bfa9378357ff",
-  measurementId: "G-DNRM78LJ2Y"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
