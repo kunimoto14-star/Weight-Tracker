@@ -85,10 +85,33 @@ function App() {
     }
   };
 
+  const [configError, setConfigError] = useState(null);
+
+  useEffect(() => {
+    // Check if critical env vars are missing
+    if (!import.meta.env.VITE_FIREBASE_API_KEY) {
+      setConfigError("APIキーが設定されていません。Vercelの環境変数を確認してください。");
+    }
+  }, []);
+
+  if (configError) {
+    return (
+      <div style={{ padding: '2rem', color: '#fff', textAlign: 'center' }}>
+        <h2 style={{ color: 'var(--danger-color)' }}>設定エラー</h2>
+        <p>{configError}</p>
+        <p style={{ fontSize: '0.8rem', marginTop: '1rem', opacity: 0.7 }}>
+          VercelのSettings > Environment Variables に正しい設定が入力されているか確認してください。
+        </p>
+      </div>
+    );
+  }
+
   if (loading && !user) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#fff' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#fff', gap: '1rem' }}>
+        <div className="loader"></div>
         読み込み中...
+        <p style={{ fontSize: '0.8rem', opacity: 0.5 }}>（30秒以上かかる場合は設定ミスの可能性があります）</p>
       </div>
     );
   }

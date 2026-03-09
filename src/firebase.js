@@ -13,6 +13,11 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+// Debug: Check if config is loaded (Only in development or to help user)
+if (!firebaseConfig.apiKey) {
+  console.error("Firebase API Key is missing! Check environment variables.");
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

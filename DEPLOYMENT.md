@@ -39,7 +39,19 @@ GitHub の無料機能を使って公開する方法です。
    ```
 4. `npm run deploy` を実行します。
 
+## 4. 環境変数の設定 (重要)
+セキュリティ対策として API キーを GitHub に公開しない設定にしたため、デプロイ先の管理画面で以下の環境変数を登録する必要があります。
+
+- `VITE_FIREBASE_API_KEY`: (APIキー)
+- `VITE_FIREBASE_AUTH_DOMAIN`: `weight-tracker-d851c.firebaseapp.com`
+- `VITE_FIREBASE_PROJECT_ID`: `weight-tracker-d851c`
+- `VITE_FIREBASE_STORAGE_BUCKET`: `weight-tracker-d851c.firebasestorage.app`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`: `403522202862`
+- `VITE_FIREBASE_APP_ID`: `1:403522202862:web:5579c951a3bfa9378357ff`
+- `VITE_FIREBASE_MEASUREMENT_ID`: `G-DNRM78LJ2Y`
+
 ---
 
 **注意点:**
-- データの保存先（localStorage）について: 公開したURLごとにデータが保存されます。PCのブラウザで入力したデータは、同じPCの同じブラウザでそのURLを開いたときにのみ表示されます。スマホなどにデータを共有したい場合は、将来的に Firebase などのデータベース連携が必要になります。
+- **データの同期について**: このアプリは Firebase クラウドデータベースを使用しているため、同じアカウントでログインすれば、PCでもスマホでも同じデータが表示・同期されます。
+- **セキュリティ**: Google から API キーに関する警告メールが届くことがありますが、環境変数の設定と API キーの制限（Google Cloud 管理画面）を行うことで安全に運用できます。
