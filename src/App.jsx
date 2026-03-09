@@ -100,7 +100,7 @@ function App() {
         <h2 style={{ color: 'var(--danger-color)' }}>設定エラー</h2>
         <p>{configError}</p>
         <p style={{ fontSize: '0.8rem', marginTop: '1rem', opacity: 0.7 }}>
-          VercelのSettings > Environment Variables に正しい設定が入力されているか確認してください。
+          VercelのSettings &gt; Environment Variables に正しい設定が入力されているか確認してください。
         </p>
       </div>
     );
