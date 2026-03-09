@@ -15,6 +15,9 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Security Hardening: Allowed email list (add your email here)
+  const ALLOWED_EMAILS = ['test@example.com']; // ここに許可するメールアドレスを追加してください
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -22,13 +25,28 @@ export default function Login() {
 
     try {
       if (isLogin) {
+        // Login logic
         await signInWithEmailAndPassword(auth, email, password);
       } else {
+        // Registration logic with restriction
+        if (ALLOWED_EMAILS.length > 0 && !ALLOWED_EMAILS.includes(email)) {
+          throw new Error('RESTRICTED_EMAIL');
+        }
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: name });
       }
     } catch (err) {
-      setError('エラーが発生しました。入力内容を確認してください。');
+      if (err.message === 'RESTRICTED_EMAIL') {
+        setError('このメールアドレスは登録を許可されていません。');
+      } else if (err.code === 'auth/invalid-api-key' || err.code === 'auth/network-request-failed') {
+        setError('Firebaseの設定が正しくないか、ネットワークエラーです。src/firebase.js を確認してください。');
+      } else if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+        setError('メールアドレスまたはパスワードが正しくありません。');
+      } else if (err.code === 'auth/email-already-in-use') {
+        setError('このメールアドレスは既に登録されています。');
+      } else {
+        setError('エラーが発生しました: ' + (err.code || err.message));
+      }
       console.error(err);
     } finally {
       setLoading(false);
